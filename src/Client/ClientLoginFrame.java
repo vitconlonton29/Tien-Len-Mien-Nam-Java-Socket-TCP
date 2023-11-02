@@ -92,11 +92,6 @@ public class ClientLoginFrame extends JFrame {
 		lblNewLabel.setBounds(10, 10, 592, 36);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblHunhCaoBo = new JLabel("Hu\u1EF3nh Cao B\u1EA3o Long - 18it3");
-		lblHunhCaoBo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 19));
-		lblHunhCaoBo.setBounds(10, 52, 592, 36);
-		contentPane.add(lblHunhCaoBo);
-		
 		textFieldAccountName = new JTextField();
 		textFieldAccountName.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		textFieldAccountName.setBounds(755, 75, 289, 36);
@@ -178,16 +173,6 @@ public class ClientLoginFrame extends JFrame {
 			
 		});
 		contentPane.add(btnLogin);
-		
-		JLabel lblNewLabel_1 = new JLabel("\u00A9 Copyright 2020 - 2021.");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel_1.setBounds(635, 305, 199, 21);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("All rights reserved.");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel_1_1.setBounds(635, 328, 187, 21);
-		contentPane.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Version 1.0");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
