@@ -37,6 +37,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import javax.swing.JToolBar;
 
 public class ClientLoginFrame extends JFrame {
 
@@ -45,24 +46,18 @@ public class ClientLoginFrame extends JFrame {
 	private JPasswordField passwordField;
 	private JLabel lblStatusConnection;
 	SQLHelper sqlHelper = new SQLHelper();
-	
-//	Socket socket;
-//	ObjectInputStream objectInputStream;
-//	ObjectOutputStream objectOutputStream;
-	//ClientThread clientThread;
 
 	/**
 	 * Launch the application.
 	 */
 	public int doAuth(UserModel userModel) {
 		SQLHelper sqlHelper = new SQLHelper();
-		if(!sqlHelper.validateUser(userModel)) {
+		if (!sqlHelper.validateUser(userModel)) {
 			return -1;
 		}
 		return 1;
 	}
-	
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -86,49 +81,46 @@ public class ClientLoginFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Ch\u01B0\u01A1ng tr\u00ECnh ch\u01A1i b\u00E0i ti\u1EBFn l\u00EAn online");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 19));
 		lblNewLabel.setBounds(10, 10, 592, 36);
 		contentPane.add(lblNewLabel);
-		
+
 		textFieldAccountName = new JTextField();
 		textFieldAccountName.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		textFieldAccountName.setBounds(755, 75, 289, 36);
 		textFieldAccountName.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 				// TODO Auto-generated method stub
 				if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (!textFieldAccountName.getText().isEmpty() || !passwordField.getText().isEmpty()) {
-						
-						UserModel userModel = new UserModel(textFieldAccountName.getText().trim(), passwordField.getText().trim());
+
+						UserModel userModel = new UserModel(textFieldAccountName.getText().trim(),
+								passwordField.getText().trim());
 						if (doAuth(userModel) == -1) {
 							JOptionPane.showMessageDialog(ClientLoginFrame.this, "Đăng nhập thấp bại.");
 							return;
 						}
-						
-		
+
 						UserInfor.accountName = textFieldAccountName.getText().trim();
-						
+
 						ClientGameplay clientGameplay = new ClientGameplay();
-						//clientGameplay.setAccountName(textFieldAccountName.getText().trim());
 						clientGameplay.setVisible(true);
-						
-						//ClientLoginFrame.this.setVisible(false);
 						dispose();
 					} else {
 						JOptionPane.showMessageDialog(ClientLoginFrame.this, "Các trường thông tin chưa hợp lệ.");
@@ -138,12 +130,12 @@ public class ClientLoginFrame extends JFrame {
 		});
 		contentPane.add(textFieldAccountName);
 		textFieldAccountName.setColumns(10);
-		
+
 		JButton btnLogin = new JButton("\u0110\u0103ng Nh\u1EADp");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnLogin.setBounds(793, 185, 140, 51);
 		btnLogin.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -151,44 +143,38 @@ public class ClientLoginFrame extends JFrame {
 					JOptionPane.showMessageDialog(ClientLoginFrame.this, "Các trường thông tin chưa hợp lệ.");
 					return;
 				}
-				UserModel userModel = new UserModel(textFieldAccountName.getText().trim(), passwordField.getText().trim());
+				UserModel userModel = new UserModel(textFieldAccountName.getText().trim(),
+						passwordField.getText().trim());
 				if (doAuth(userModel) == -1) {
 					JOptionPane.showMessageDialog(ClientLoginFrame.this, "Đăng nhập thấp bại.");
 					return;
 				}
-				
 				UserInfor.accountName = textFieldAccountName.getText().trim();
-				
-				// start audio thread in clientGamplay too
-				
-				ClientGameplay clientGameplay = new ClientGameplay();
-				//clientGameplay.setAccountName(textFieldAccountName.getText().trim());
-				clientGameplay.setVisible(true);
-				
-				//ClientLoginFrame.this.setVisible(false);
+				ClientStartGame startgame = new ClientStartGame();
+				startgame.setVisible(true);
+
 				dispose();
-				
-				
+
 			}
-			
+
 		});
 		contentPane.add(btnLogin);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Version 1.0");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2.setBounds(635, 355, 88, 15);
 		contentPane.add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_2_1 = new JLabel("Connection status:");
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2_1.setBounds(856, 355, 151, 15);
 		contentPane.add(lblNewLabel_2_1);
-		
+
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 19));
 		lblLogin.setBounds(818, 24, 122, 36);
 		contentPane.add(lblLogin);
-		
+
 		lblStatusConnection = new JLabel("");
 		lblStatusConnection.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
 		lblStatusConnection.setBounds(1001, 355, 55, 15);
@@ -200,42 +186,42 @@ public class ClientLoginFrame extends JFrame {
 			lblStatusConnection.setText("Offline");
 		}
 		contentPane.add(lblStatusConnection);
-		
+
 		JLabel lblNewLabel_1_2 = new JLabel("Don't have account ?");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_2.setBounds(755, 160, 122, 15);
 		contentPane.add(lblNewLabel_1_2);
-		
+
 		JLabel lblSign = new JLabel("Sign in");
 		lblSign.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSign.setBounds(875, 160, 45, 15);
 		lblSign.setForeground(Color.blue);
 		lblSign.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
@@ -244,35 +230,33 @@ public class ClientLoginFrame extends JFrame {
 			}
 		});
 		contentPane.add(lblSign);
-		
+
 		JLabel lblBackGround = new JLabel();
 		BufferedImage bufferdImageBackground;
 		try {
-			bufferdImageBackground = ImageIO.read(new File("D:\\Study\\Ky 7\\Lap trinh mang\\project\\g4_proj-026075234\\TienLenMienNam\\Resource\\Happy.jpg"));
+			bufferdImageBackground = ImageIO.read(new File(
+					"D:\\Study\\Ky 7\\Lap trinh mang\\project\\g4_proj-026075234\\TienLenMienNam\\Resource\\Happy.jpg"));
 			Image imageScaled = bufferdImageBackground.getScaledInstance(625, 417, Image.SCALE_SMOOTH);
 			imageScaled.flush();
 			ImageIcon imageIcon = new ImageIcon(imageScaled);
 			lblBackGround.setIcon(imageIcon);
 			lblBackGround.setBounds(0, 0, 625, 417);
 			contentPane.add(lblBackGround);
-			
+
 			JLabel lblUsername = new JLabel("Username");
 			lblUsername.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 19));
 			lblUsername.setBounds(635, 73, 122, 36);
 			contentPane.add(lblUsername);
-			
+
 			JLabel lblPassword = new JLabel("Password");
 			lblPassword.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 19));
 			lblPassword.setBounds(635, 123, 122, 36);
 			contentPane.add(lblPassword);
-			
+
 			passwordField = new JPasswordField();
 			passwordField.setBounds(755, 121, 289, 36);
 			contentPane.add(passwordField);
-			
-			
-			
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
